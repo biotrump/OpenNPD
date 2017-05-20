@@ -49,16 +49,17 @@ int main(int argc, char* argv[])
         vector< int >& Xs = npd.getXs();
         vector< int >& Ys = npd.getYs();
         vector< int >& Ss = npd.getSs();
-        //vector< float >& Scores = npd.getScores();
-
+        vector< float >& Scores = npd.getScores();
+        char buf[10];
         for(int i = 0; i < n; i++)
         {
             //int deta = Ss[i]/10;
-            //if(Scores[i] < 22.38)
-            //    continue;
+            if(Scores[i] < 22.38)
+                continue;
 
             cv::rectangle(img, cv::Rect(Xs[i], Ys[i], Ss[i], Ss[i]), cv::Scalar(255, 0, 0));
-
+            sprintf(buf, "%.3f", Scores[i]);
+            cv::putText(img, buf, cv::Point(Xs[i], Ys[i]), 1, 0.5, cv::Scalar(255,255,255)); 
         }
         cv::imshow("hehe", img);
         cv::waitKey(10);
